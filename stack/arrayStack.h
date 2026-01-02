@@ -4,7 +4,8 @@
 #include <iostream>
 using namespace std;
 
-class Stack {
+class arrayStack
+{
 private:
     int top;
     int size;
@@ -12,8 +13,8 @@ private:
     void expandArr();
 
 public:
-    Stack(int s = 5);
-    ~Stack();
+    arrayStack(int s = 5);
+    ~arrayStack();
 
     int getSize();
     void push(int value);
