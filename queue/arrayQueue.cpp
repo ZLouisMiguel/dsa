@@ -1,17 +1,20 @@
-#include <iostream>
-using namespace std;
+#ifndef QUEUE_H
+#define QUEUE_H
 
+#include <iostream>
+
+template <typename T>
 class Queue
 {
 private:
     int n;
-    int *arrQueue;
+    T *arrQueue;
     int front, rear;
 
 public:
     Queue(int size = 100) : n(size), front(-1), rear(-1)
     {
-        arrQueue = new int[n];
+        arrQueue = new T[n];
     }
 
     ~Queue()
@@ -19,11 +22,11 @@ public:
         delete[] arrQueue;
     }
 
-    void enqueue(int data)
+    void enqueue(const T &data)
     {
         if (rear == n - 1)
         {
-            cout << "Queue overflow\n";
+            std::cout << "Queue overflow\n";
             return;
         }
 
@@ -37,7 +40,7 @@ public:
     {
         if (front == -1 || front > rear)
         {
-            cout << "Queue underflow\n";
+            std::cout << "Queue underflow\n";
             return;
         }
 
@@ -47,7 +50,7 @@ public:
             front = rear = -1;
     }
 
-    int getFront() const 
+    T getFront() const
     {
         if (!isEmpty())
         {
@@ -55,46 +58,49 @@ public:
         }
         else
         {
-            cout << "Queue is empty\n";
-            return -1;
+            std::cout << "Queue is empty\n";
+            return T{}; // default value for any type
         }
     }
 
-    bool isEmpty() const 
+    bool isEmpty() const
     {
-        return (front == -1);
+        return front == -1;
     }
 
-    void display() const 
+    void display() const
     {
         if (isEmpty())
         {
-            cout << "The queue is empty \n";
+            std::cout << "The queue is empty\n";
             return;
         }
+
         for (int i = front; i <= rear; i++)
-        {
-            cout << arrQueue[i] << " ";
-        }
-        cout << "\n";
+            std::cout << arrQueue[i] << " ";
+
+        std::cout << "\n";
     }
 
     void dequeueShift()
     {
         if (front == -1)
         {
-            cout << "Queue Underflow/Empty ";
+            std::cout << "Queue Underflow/Empty\n";
             return;
         }
-        cout << "Element deleted from queue is : " << arrQueue[front] << endl;
+
+        std::cout << "Element deleted from queue is : "
+                  << arrQueue[front] << "\n";
+
         for (int i = front; i < rear; i++)
-        {
             arrQueue[i] = arrQueue[i + 1];
-        }
+
         rear--;
-     
-        if(rear < front) {
+
+        if (rear < front)
             front = rear = -1;
-        }
     }
 };
+
+#endif
