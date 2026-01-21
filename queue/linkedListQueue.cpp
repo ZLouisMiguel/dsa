@@ -60,7 +60,7 @@ public:
 
         Node *temp = head;
         head = head->next;
-        temp->next = nullptr;
+        // temp->next = nullptr;
         delete temp;
         size--;
     }
@@ -68,7 +68,7 @@ public:
     void display()
     {
         Node *temp = head;
-
+        cout << "\n";
         while (temp != nullptr)
         {
             cout << temp->data << " ";
@@ -76,11 +76,38 @@ public:
         }
     }
 
-    // void display2() {
-    //     while(!q.isEmpty()) {
-    //         cout << q.front() << "\n";
-    //         q.dequeue();
-    //     }
-    // }
-    
+    int front()
+    {
+        return head->data;
+    }
+
+    void display2(Queue *q)
+    {
+        cout << "\n";
+        while (!q->isEmpty())
+        {
+            cout << q->front() << "\n";
+            q->dequeue();
+        }
+    }
 };
+
+int main()
+{
+    Queue *q = new Queue();
+
+    q->enqueue(10);
+    q->enqueue(20);
+    q->enqueue(30);
+    q->enqueue(40);
+    q->enqueue(50);
+    q->display();
+
+    q->dequeue();
+    q->display();
+
+    q->display2(q);
+    q->display();
+
+    return 0;
+}
