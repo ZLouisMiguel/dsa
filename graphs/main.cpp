@@ -1,0 +1,74 @@
+#include <iostream>
+using namespace std;
+
+class AdjacencyMatrix {
+private:
+    int n;
+    int **adj;
+
+public:
+    AdjacencyMatrix(int n) {
+        this->n = n;
+        adj = new int*[n];
+        for (int i = 0; i < n; i++) {
+            adj[i] = new int[n];
+            for (int j = 0; j < n; j++) {
+                adj[i][j] = 0;
+            }
+        }
+    }
+
+    void add_edge(int origin, int destin) {
+        if (origin > n || destin > n || origin <= 0 || destin <= 0) {
+            cout << "Invalid edge!\n";
+            return;
+        }
+        adj[origin - 1][destin - 1] = 1;
+    }
+
+    void delete_edge(int origin, int destin) {
+        if (origin > n || destin > n || origin <= 0 || destin <= 0) {
+            cout << "Invalid edge!\n";
+            return;
+        }
+        adj[origin - 1][destin - 1] = 0;
+    }
+
+    void display() {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                cout << adj[i][j] << " ";
+            }
+            cout << "\n";
+        }
+    }
+
+    ~AdjacencyMatrix() {
+        for (int i = 0; i < n; i++) {
+            delete[] adj[i];
+        }
+        delete[] adj;
+    }
+};
+
+int main() {
+    int nodes, origin, destin;
+
+    cout << "Enter number of nodes: ";
+    cin >> nodes;
+
+    AdjacencyMatrix am(nodes);
+
+    while (true) {
+        cout << "Enter edge (-1 -1 to exit): ";
+        cin >> origin >> destin;
+
+        if (origin == -1 && destin == -1)
+            break;
+
+        am.add_edge(origin, destin);
+        am.display();
+    }
+
+    return 0;
+}
