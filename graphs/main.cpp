@@ -13,21 +13,21 @@ public:
         for (int i = 0; i < n; i++) {
             adj[i] = new int[n];
             for (int j = 0; j < n; j++) {
-                adj[i][j] = 0;
+                adj[i][j] = 0; // no edge
             }
         }
     }
 
-    void add_edge(int origin, int destin) {
-        if (origin > n || destin > n || origin <= 0 || destin <= 0) {
+    void add_edge(int origin, int destin, int weight) {
+        if (origin <= 0 || destin <= 0 || origin > n || destin > n) {
             cout << "Invalid edge!\n";
             return;
         }
-        adj[origin - 1][destin - 1] = 1;
+        adj[origin - 1][destin - 1] = weight;
     }
 
     void delete_edge(int origin, int destin) {
-        if (origin > n || destin > n || origin <= 0 || destin <= 0) {
+        if (origin <= 0 || destin <= 0 || origin > n || destin > n) {
             cout << "Invalid edge!\n";
             return;
         }
@@ -52,7 +52,7 @@ public:
 };
 
 int main() {
-    int nodes, origin, destin;
+    int nodes, origin, destin, weight;
 
     cout << "Enter number of nodes: ";
     cin >> nodes;
@@ -60,13 +60,13 @@ int main() {
     AdjacencyMatrix am(nodes);
 
     while (true) {
-        cout << "Enter edge (-1 -1 to exit): ";
-        cin >> origin >> destin;
+        cout << "Enter edge (origin destination weight, -1 -1 -1 to exit): ";
+        cin >> origin >> destin >> weight;
 
-        if (origin == -1 && destin == -1)
+        if (origin == -1 && destin == -1 && weight == -1)
             break;
 
-        am.add_edge(origin, destin);
+        am.add_edge(origin, destin, weight);
         am.display();
     }
 
