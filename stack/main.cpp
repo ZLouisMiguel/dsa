@@ -1,6 +1,7 @@
-#include "arrayStack.h"
-#include "iostream"
-#include "genericArrayStack.h"
+#include "array/arrayStack.h"
+#include "array/genericArrayStack.h"
+#include <iostream>
+
 using namespace std;
 
 int main()
