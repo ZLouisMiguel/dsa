@@ -38,16 +38,13 @@ int main()
         {0, 3, 4},
         {1, 2, 2},
         {2, 3, 3},
-        {1, 3, 5}
-    };
+        {1, 3, 5}};
 
     sort(edges.begin(), edges.end(), compareByWeight);
 
     parent.resize(4);
     for (int i = 0; i < 4; i++)
-    {
         parent[i] = i;
-    }
 
     vector<Edge> mst;
     int totalCost = 0;
